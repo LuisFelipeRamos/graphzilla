@@ -28,3 +28,7 @@ def prim(graph: Graph, starting_node: np.int_ = 0):
             for edge in [(graph.get_weight(node_t, neighboor), (node_t, neighboor)) for neighboor in graph.neighboors(node_t) if not visited[neighboor]]:
                 heappush(pq, edge)
     return mst
+
+""" Computes a minimum spanning tree of the graph using Kruskal's algorithm. """
+def kruskal(graph: Graph):
+    pass

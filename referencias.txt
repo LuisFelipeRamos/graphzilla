@@ -1,4 +1,8 @@
-reducible
+Reducible
 https://www.youtube.com/watch?v=PMMc4VsIacU&t=724s
 
-networkx
+Networkx
+https://networkx.org/
+
+Shortest path algorithms
+https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/tutorial/
