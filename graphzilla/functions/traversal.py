@@ -13,7 +13,7 @@ from graphzilla.classes import *
 By default, it uses a iterative approach. A recursive approach is yet to be implemented.
 It does a preorder traversal in the graph.Inorder and Postorder are yet to be implemented.
 The starting nodes is, by default, node 0. You can change it in the parameter starting_node """
-def depth_first_search_nodes(graph, starting_node: int = 0, mode: str = "preorder"):
+def depth_first_search_nodes(graph: Graph, starting_node: int = 0, mode: str = "preorder"):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
     stack: deque = deque()
     stack.append(starting_node)
@@ -31,7 +31,7 @@ def depth_first_search_nodes(graph, starting_node: int = 0, mode: str = "preorde
 """ Performes a depth first search in a graph, directed or undirected, and returns de dfs tree.
 It does a preorder traversal in the graph. Inorder and Postorder are yet to be implemented.
 The starting nodes is, by default, node 0. You can change it in the parameter starting_node """
-def depth_first_search_tree(graph, starting_node: int = 0):
+def depth_first_search_tree(graph: Graph, starting_node: int = 0):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
     stack: deque = deque()
     stack.append((starting_node, None))
@@ -48,25 +48,43 @@ def depth_first_search_tree(graph, starting_node: int = 0):
     return dfs_tree
 
 """ Performes a breadth first search in a graph, directed or undirected.
-Returns a NxN matrix with the layers oh each node in respect to the starting node (for
+Returns a array matrix with the layers oh each node in respect to the starting node (for
 unweighted graphs, it can be used to compute shortest path between starting node and every other node).
 By default, it uses a iterative approach. A recursive approach is yet to be implemented.
-The starting nodes is, by default, node 0. You can change it in the parameter starting_node """
-def breadth_first_search(graph, starting_node: int = 0):
+The starting nodes is, by default, node 0. You can change it in the parameter starting_node. 
+OBS: the layer value -1 means that there is no path between the starting node and the node with layer value -1."""
+def breadth_first_search_layers(graph: Graph, starting_node: int = 0):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
-    layers: NDArrayInt = np.zeros((graph.number_of_nodes, graph.number_of_nodes), dtype = np.int_)
-    stack: deque = deque()
-    stack.append((starting_node,None))
-    while len(stack) > 0:
-        curr_node, prev_node = stack.pop()
-        if prev_node is not None:
-            curr_dist: int = layers[prev_node][curr_node]
-        else:
-            curr_dist: int = 0
-        if not visited[curr_node]:
-            visited[curr_node] = 1
-            for neighboor in graph.neighboors(curr_node):
-                if not visited[neighboor]:
-                    stack.append((neighboor, curr_node))
-                    layers[prev_node][curr_node] = curr_dist + 1
+    visited[starting_node] = 1
+    layers: NDArrayInt = np.ones(graph.number_of_nodes, dtype = np.int_) * -1
+    layers[starting_node] = 0
+    queue: deque = deque()
+    queue.append(starting_node)
+    while len(queue) > 0:
+        curr_node = queue.popleft()
+        for neighboor in graph.neighboors(curr_node):
+            if not visited[neighboor]:
+                visited[neighboor] = 1
+                queue.append(neighboor)
+                layers[neighboor] = layers[curr_node] + 1
     return layers
+
+""" Performes a breadth first search in a graph, directed or undirected.
+Returns the bfs tree of the graph.
+By default, it uses a iterative approach. A recursive approach is yet to be implemented.
+The starting nodes is, by default, node 0. You can change it in the parameter starting_node. 
+"""
+def breadth_first_search_tree(graph: Graph, starting_node: int = 0):
+    visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
+    visited[starting_node] = 1
+    bfs_tree: Graph = Graph(nodes = graph.nodes)
+    queue: deque = deque()
+    queue.append(starting_node)
+    while len(queue) > 0:
+        curr_node = queue.popleft()
+        for neighboor in graph.neighboors(curr_node):
+            if not visited[neighboor]:
+                visited[neighboor] = 1
+                queue.append(neighboor)
+                bfs_tree.add_edge((curr_node, neighboor))
+    return bfs_tree

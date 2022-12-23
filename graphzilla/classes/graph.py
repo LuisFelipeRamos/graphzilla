@@ -45,6 +45,12 @@ class Graph:
             self.adjacency_matrix[tuple(reversed(edge[0]))] = edge[1]
         self.edges.append(edge)
         self.number_of_edges += 1
+    
+    """ Get weight between nodes S and T """
+    def get_weight(self, s: int, t: int):
+        if not self.weighted:
+            return 1
+        return self.adjacency_matrix[s, t]
 
     def __repr__(self):
         return f"Graph with {self.number_of_nodes} nodes and {self.number_of_edges} edges"
