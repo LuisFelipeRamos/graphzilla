@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 import numpy.typing as npt
+from disjoint_set import DisjointSet
 
 NDArrayInt = npt.NDArray[np.int_]
 NDArrayFloat = npt.NDArray[np.float_]
@@ -12,7 +13,7 @@ from graphzilla.classes import *
 """ Computes a minimum spanning tree of the graph using Prim's algorithm.
 By default, it starts at node 0. """
 def prim(graph: Graph, starting_node: np.int_ = 0):
-    mst: Graph = Graph(nodes = graph.nodes, weighted=True)
+    mst: Graph = Graph(nodes = graph.nodes, edges = [], weighted=True)
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
     visited[starting_node] = 1
     pq = [(graph.get_weight(starting_node, neighboor), (starting_node, neighboor)) for neighboor in graph.neighboors(starting_node)]
@@ -31,4 +32,14 @@ def prim(graph: Graph, starting_node: np.int_ = 0):
 
 """ Computes a minimum spanning tree of the graph using Kruskal's algorithm. """
 def kruskal(graph: Graph):
-    pass
+    ordered_edges: list[tuple[tuple[int]]] = sorted(graph.edges, key = lambda x: x[1])
+    mst: Graph = Graph(graph.nodes, edges = [], weighted=True)
+    ds: DisjointSet = DisjointSet()
+    for edge in ordered_edges:
+        node_a: int = edge[0][0]
+        node_b: int = edge[0][1]
+        if not ds.connected(node_a, node_b):
+            mst.add_edge(edge)
+            ds.union(node_a, node_b)
+    return mst
+
