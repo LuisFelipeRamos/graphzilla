@@ -43,3 +43,6 @@ def kruskal(graph: Graph):
             ds.union(node_a, node_b)
     return mst
 
+def boruvka(graph: Graph):
+    pass
+
