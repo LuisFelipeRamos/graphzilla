@@ -11,9 +11,8 @@ from graphzilla.classes import *
 
 """ Performes a depth first search in a graph, directed or undirected, and returns the nodes in order of visit.
 By default, it uses a iterative approach. A recursive approach is yet to be implemented.
-It does a preorder traversal in the graph.Inorder and Postorder are yet to be implemented.
 The starting nodes is, by default, node 0. You can change it in the parameter starting_node """
-def depth_first_search_nodes(graph: Graph, starting_node: int = 0, mode: str = "preorder"):
+def depth_first_search_nodes(graph: Graph, starting_node: int = 0):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
     stack: deque = deque()
     stack.append(starting_node)
@@ -29,7 +28,6 @@ def depth_first_search_nodes(graph: Graph, starting_node: int = 0, mode: str = "
     return order_of_visit
 
 """ Performes a depth first search in a graph, directed or undirected, and returns de dfs tree.
-It does a preorder traversal in the graph. Inorder and Postorder are yet to be implemented.
 The starting nodes is, by default, node 0. You can change it in the parameter starting_node """
 def depth_first_search_tree(graph: Graph, starting_node: int = 0):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
