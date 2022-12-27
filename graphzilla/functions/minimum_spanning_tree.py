@@ -26,7 +26,7 @@ def prim(graph: Graph, starting_node: np.int_ = 0):
             mst.add_edge((curr_edge[1], curr_edge[0]))
             visited[node_s] = 1
             visited[node_t] = 1
-            for edge in [(graph.get_weight(node_t, neighboor), (node_t, neighboor)) for neighboor in graph.neighboors(node_t) if not visited[neighboor]]:
+            for edge in [(graph.get_weight(node_t, neighbor), (node_t, neighbor)) for neighbor in graph.neighbors(node_t) if not visited[neighbor]]:
                 heappush(pq, edge)
     return mst
 

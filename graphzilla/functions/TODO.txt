@@ -1,1 +1,3 @@
-1. DIfferet orders in dfs
+1. Differet orders in dfs
+
+2. Djikstra should return the prev of each node to, not important now

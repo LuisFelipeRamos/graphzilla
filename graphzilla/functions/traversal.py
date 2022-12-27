@@ -22,9 +22,9 @@ def depth_first_search_nodes(graph: Graph, starting_node: int = 0):
         if not visited[curr_node]:
             visited[curr_node] = 1
             order_of_visit.append(curr_node)
-            for neighboor in graph.neighboors(curr_node):
-                if not visited[neighboor]:
-                    stack.append(neighboor)
+            for neighbor in graph.neighbors(curr_node):
+                if not visited[neighbor]:
+                    stack.append(neighbor)
     return order_of_visit
 
 """ Performes a depth first search in a graph, directed or undirected, and returns de dfs tree.
@@ -40,9 +40,9 @@ def depth_first_search_tree(graph: Graph, starting_node: int = 0):
             visited[curr_node] = 1
             if prev_node is not None:
                 dfs_tree.add_edge((curr_node, prev_node))
-            for neighboor in graph.neighboors(curr_node):
-                if not visited[neighboor]:
-                    stack.append((neighboor, curr_node))
+            for neighbor in graph.neighbors(curr_node):
+                if not visited[neighbor]:
+                    stack.append((neighbor, curr_node))
     return dfs_tree
 
 """ Performes a breadth first search in a graph, directed or undirected.
@@ -60,11 +60,11 @@ def breadth_first_search_layers(graph: Graph, starting_node: int = 0):
     queue.append(starting_node)
     while len(queue) > 0:
         curr_node = queue.popleft()
-        for neighboor in graph.neighboors(curr_node):
-            if not visited[neighboor]:
-                visited[neighboor] = 1
-                queue.append(neighboor)
-                layers[neighboor] = layers[curr_node] + 1
+        for neighbor in graph.neighbors(curr_node):
+            if not visited[neighbor]:
+                visited[neighbor] = 1
+                queue.append(neighbor)
+                layers[neighbor] = layers[curr_node] + 1
     return layers
 
 """ Performes a breadth first search in a graph, directed or undirected.
@@ -80,9 +80,9 @@ def breadth_first_search_tree(graph: Graph, starting_node: int = 0):
     queue.append(starting_node)
     while len(queue) > 0:
         curr_node = queue.popleft()
-        for neighboor in graph.neighboors(curr_node):
-            if not visited[neighboor]:
-                visited[neighboor] = 1
-                queue.append(neighboor)
-                bfs_tree.add_edge((curr_node, neighboor))
+        for neighbor in graph.neighbors(curr_node):
+            if not visited[neighbor]:
+                visited[neighbor] = 1
+                queue.append(neighbor)
+                bfs_tree.add_edge((curr_node, neighbor))
     return bfs_tree

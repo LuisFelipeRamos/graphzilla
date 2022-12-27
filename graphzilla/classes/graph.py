@@ -32,7 +32,7 @@ class Graph:
                 self.adjacency_matrix[tuple(reversed(edge[0]))] = edge[1]
         
     """ Get neighboors of node in graph. """
-    def neighboors(self, node: int) -> NDArrayInt:
+    def neighbors(self, node: int) -> NDArrayInt:
         return np.where(self.adjacency_matrix[node] != 0)[0]
 
     """ Add edge to graph. """

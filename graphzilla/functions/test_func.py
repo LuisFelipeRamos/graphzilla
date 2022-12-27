@@ -1,4 +1,5 @@
-import pytest
+from scipy.sparse.csgraph import floyd_warshall
+
 """ This file contains test classes for every st of functions defined
 in this directory. The library pytest is used for the tests. """
 
@@ -53,3 +54,8 @@ class TestMinimumSpanningTree:
         ((2, 5), 4), ((7, 6), 1), ((6, 5), 2), ((3, 4), 9)]
         expected_mst: Graph = Graph(nodes, expected_edges, weighted=True)
         assert np.all(mst.adjacency_matrix == expected_mst.adjacency_matrix)
+
+class TestShortestPath:
+
+    def test_floyd_warshall_1(self):
+        pass
