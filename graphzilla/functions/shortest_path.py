@@ -12,7 +12,7 @@ from graphzilla.classes import *
 """ Computes the minimum distance from starting node to every other node in the graph, using
 Djikstra's algorithm. It uses a priority queue to order paths. 
 TODO: use indexed priority queue. """
-def djkistra(graph: Graph, starting_node: int = 0):
+def dijkstra(graph: Graph, starting_node: int = 0):
     visited: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_)
     dist: NDArrayFloat = np.ones(graph.number_of_nodes, dtype = np.int_) * np.inf
     prev: NDArrayInt = np.zeros(graph.number_of_nodes, dtype = np.int_) # should return prev to
